@@ -24,12 +24,8 @@ function AdminDashboard() {
         <div>
             <Header/>
             <div className={classes.ecomText}>
-                <Typography className={classes.ecomDescription} variant="h3">Ecommerce</Typography>
                 <Container>
-                <Typography className={classes.ecomDescription} >
-                    Create an online store with the leading eCommerce platform
-                    Sell online with a professional online store. Launch, run and scale your online store with our industry-leading eCommerce website builder and advanced business features.
-                </Typography>
+              
                 <div>
                     <Typography className={classes.ecomDescription} variant="h4">The simple way to tackle the complexity of selling online</Typography>
                     <Grid container spacing={2}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography,Grid ,Container} from '@mui/material';
+import { Typography,Grid ,Container, Button} from '@mui/material';
 import {makeStyles} from '@mui/styles';
 
 const useStyles = makeStyles({
@@ -14,16 +14,16 @@ const useStyles = makeStyles({
       textAlign:'center',
       display: 'flex',
       justifyContent:'space-evenly',
-      color:'#fff'
-      
+      color:'#fff',
+      textDecoration:'none',
     },
   });
 function Header() {
     const classes = useStyles(); 
     return (
        <div className={classes.heading}>
-            <Grid container spacing={2}>
-                <Grid item xs={3}>
+            <Grid container spacing={1} >
+                <Grid item xs={12} lg={3}>
                     <div className={classes.headerMenu}>
                         <Typography>logo</Typography> 
                         <Typography>Ecommerce</Typography>
@@ -31,12 +31,12 @@ function Header() {
                         <Typography>Ecommerce</Typography>
                     </div>
                 </Grid> 
-                <Grid item xs={7}>
+                <Grid item lg={7}>
                 </Grid>
-                <Grid item xs={2}>
-                    <div className={classes.headerMenu}>
-                        <Typography>Login</Typography>
-                        <Typography>Register</Typography>
+                <Grid item xs={12} lg={2}>
+                    <div  className={classes.headerMenu}>
+                    <Button variant="contained" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
+                    <Button variant="contained" ><a className={classes.headerMenu} href="/register">Signup</a></Button>
                     </div>
                 </Grid> 
             </Grid>      
