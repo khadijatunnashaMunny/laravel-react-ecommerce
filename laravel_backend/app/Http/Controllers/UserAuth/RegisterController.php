@@ -26,7 +26,9 @@ class RegisterController extends Controller
             "message"=>"registered successfully"
         ]);
        
-       
+        // $INS=DB::table('reg_data')->insert($data);
+        // return Redirect()->back();
 
     }
 }
+
