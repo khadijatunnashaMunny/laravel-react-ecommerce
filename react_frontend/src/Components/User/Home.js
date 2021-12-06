@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Typography, Grid } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import Header from "./Header";
+import HomePageCarousol from "./HomePageCarousol";
 
 const useStyles = makeStyles({
   ecomDescription: {
@@ -10,7 +11,6 @@ const useStyles = makeStyles({
   ecomText: {
     alignItems: "center",
     textAlign: "center",
-    marginTop: "3%",
   },
 });
 function Home() {
@@ -19,6 +19,7 @@ function Home() {
   return (
     <div className={classes.ecomText}>
       <Header />
+      <HomePageCarousol/>
 
       <Typography className={classes.ecomDescription} variant="h3">
         Ecommerce

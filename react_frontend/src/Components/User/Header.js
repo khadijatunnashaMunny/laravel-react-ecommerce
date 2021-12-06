@@ -23,23 +23,26 @@ function Header() {
     return (
        <div className={classes.heading}>
             <Grid container spacing={1} >
-                <Grid item xs={12} lg={3}>
-                    <div className={classes.headerMenu}>
-                        <Typography>logo</Typography> 
-                        <Typography>Ecommerce</Typography>
-                        <Typography>Ecommerce</Typography>
-                        <Typography>Ecommerce</Typography>
+                <Grid item xs={12} lg={4} >
+                    <div  className={classes.headerMenu}>
+                        <Button variant="text" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
+                        <Button variant="text" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
+                        <Button variant="text" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
+                        <Button variant="text" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
                     </div>
                 </Grid> 
-                <Grid item lg={7}>
-                </Grid>
-                <Grid item xs={12} lg={2}>
-                    <div  className={classes.headerMenu}>
-                    <Button variant="contained" ><a className={classes.headerMenu} href="/login">Sign in</a></Button>
+              
+                <Grid item xs={12} lg={11}>
+                    <div   style={{ display: "flex", justifyContent: "flex-end", width: "100%" }} className={classes.headerMenu}>
+                    <Button variant="contained" style={{background:'#F4B70A'}}><a className={classes.headerMenu} href="/login">Sign in</a></Button>
                     <Button variant="contained" ><a className={classes.headerMenu} href="/register">Signup</a></Button>
                     </div>
                 </Grid> 
             </Grid>      
+
+
+
+
        </div>
     )
 }
