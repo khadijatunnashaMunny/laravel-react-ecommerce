@@ -33,6 +33,7 @@ function Category() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const [errors, setErrors] = useState("");
 
   const [categoryInput, setcategory] = useState({
     productId: "",
@@ -40,25 +41,35 @@ function Category() {
     productDes: "",
     productPrice: "",
   });
+  const {productId,productName,productDes,productPrice}=categoryInput;
   const handleInput = (e) => {
-    e.persist();
+   
     setcategory({ ...categoryInput, [e.target.name]: e.target.value });
   };
-  const submitCategory=(e)=>{
-    // e.preventDefault();
+  // const submitCategory=(e)=>{
+  //   // e.preventDefault();
 
-    const data={
-      productId: categoryInput.productId,
-      productName:categoryInput.productName,
-      productDes:categoryInput.productDes,
-      productPrice:categoryInput.productPrice,
-    };
+  //   const data={
+  //     productId: categoryInput.productId,
+  //     productName:categoryInput.productName,
+  //     productDes:categoryInput.productDes,
+  //     productPrice:categoryInput.productPrice,
+  //   };
 
-      axios.post('/api/register', data).then(res => {
-        if (res.data.status === 200) {
-        swal("success", res.data.message, "success");
-      }
-    });
+  //     axios.post('http://localhost:8000/api/category', data).then(res => {
+  //       if (res.data.status === 200) {
+  //       swal("success", res.data.message, "success");
+  //     }
+  //   });
+
+  // }
+  async function submitCategory(){
+    let result =await axios.post("http://localhost:8000/api/category",categoryInput);
+    setErrors('registration successfully');
+    setcategory({ productId: "",
+    productName: "",
+    productDes: "",
+    productPrice: "",})
 
   }
   return (
@@ -74,7 +85,6 @@ function Category() {
                 aria-label="lab API tabs example"
               >
                 <Tab label="Item One" value="1" />
-                <Tab label="Item Two" value="2" />
               </TabList>
             </Box>
           <form onSubmit={submitCategory}>
@@ -135,9 +145,8 @@ function Category() {
               </Grid>
 
             </TabPanel>
-            <Button type="submit" variant="contained">Submit</Button>
+            <Button type="submit"  variant="contained">Submit</Button>
           </form>
-            <TabPanel value="2">Item Two</TabPanel>
         </TabContext>
       </Box>
     </div>

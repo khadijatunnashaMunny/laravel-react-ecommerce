@@ -11,22 +11,27 @@ use Illuminate\Support\Facades\DB;
 class CategoryController extends Controller
 {
     //
-    public function category(Request $request){
-        $Category= new Category;
+    // public function category(Request $request){
 
-        $Category->productId=$request->input('productId');
-        $Category->productName=$request->input('productName');
-        $Category->productDes=$request->input('productDes');
-        $Category->productPrice=$request->input('productPrice');
-        $Category->save();
-        return response()->json([
-            'status'=>200,
-            'message'=>"successfully added",
-            'productName'=> $Category->productName,
-            'productDes'=> $Category->productDes,
-            'productPrice'=> $Category->productPrice,
-            'productId'=> $Category->productId,
-        ]);
+    //     $productId=$request->input('productId');
+    //     $productName=$request->input('productName');
+    //     $productDes=$request->input('productDes');
+    //     $productPrice=$request->input('productPrice');
+    // }
+    // DB::table('categories')->insert([
+    //     'productId' => $productId,
+    //     'productName'=> $productName,
+    //     'productDes' =>$productDes,
+    //     'productPrice'=>$productPrice
+    // ]);
 
-    }
+    // return response()->json([
+    //     'status'=>200,
+    //     'message'=>"successfully added",
+    //     'productName'=> $Category->productName,
+    //     'productDes'=> $Category->productDes,
+    //     'productPrice'=> $Category->productPrice,
+    //     'productId'=> $Category->productId,
+    // ]);
+
 }
