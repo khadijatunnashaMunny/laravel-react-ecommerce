@@ -22,37 +22,41 @@ class Student extends Component {
       [e.target.name]:e.target.value,
     });
   }
-  submitCategory = async(e) => {
+  submitCategory = (e) => {
     e.preventDefault();
-    const res = await axios.post(
-      'http://127.0.0.1:8000/api/add_student',
-      this.state
-    );
-    if(res.data.status=== 200) {
-      console.log(res.data.message);
-      this.setState({
-        productId: "",
-        productName: "",
-        productDes: "",
-        productPrice: "",
-      });
-    }
+   
+    axios.get('/sanctum/csrf-cookie').then(response => {
+        axios.post('http://127.0.0.1:8000/api/add_student',  this.state).then(res => {
+            if (res.data.status === 200) {
+               console.log(res.data.message);
+               this.setState({
+                productId: "",
+                productName: "",
+                productDes: "",
+                productPrice: "",
+              });
+            }
+        });
+    
+   
+     
+});
   };
 
   render() {
     return (
       <div>
         <Typography variant="h3">Add category</Typography>
-        <form onSubmit={this.submitCategory}>
+        <form >
           <Grid container spacing={0}>
             <Grid item xs={12} lg={7}>
               <TextField
                 name="productId"
                 margin="normal"
-                value={this.state.productId}
+              
                 id="outlined-basic"
                 label="product Id"
-                onChange={this.handleInput}
+               
                 variant="outlined"
               />
               <br />
@@ -61,8 +65,8 @@ class Student extends Component {
               <TextField
                 name="productName"
                 margin="normal"
-                onChange={this.handleInput}
-                value={this.state.productName}
+               
+              
                 id="outlined-basic"
                 label="product Name "
                 variant="outlined"
@@ -71,8 +75,7 @@ class Student extends Component {
             <br />
             <Grid item xs={12} lg={7}>
               <TextField
-                onChange={this.handleInput}
-                value={this.state.productDes}
+              
                 name="productDes"
                 margin="normal"
                 id="outlined-basic"
@@ -84,8 +87,7 @@ class Student extends Component {
 
             <Grid item xs={12} lg={7}>
               <TextField
-                onChange={this.handleInput}
-                value={this.state.productPrice}
+             
                 name="productPrice"
                 margin="normal"
                 id="outlined-basic"

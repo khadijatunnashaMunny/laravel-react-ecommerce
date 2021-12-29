@@ -1,156 +1,91 @@
-import React, { useState } from "react";
-import {
-  Container,
-  Typography,
-  Grid,
-  TextField,
-  Tab,
-  Box,
-  Button,
-} from "@mui/material";
-import { makeStyles } from "@mui/styles";
-import { TabContext } from "@mui/lab";
-import TabList from "@mui/lab/TabList";
-import TabPanel from "@mui/lab/TabPanel";
-import axios from "axios";
-import swal from 'sweetalert';
+import React,{useState} from 'react'
+import {Container,Typography,Grid,TextField,Tab, Box, Button,} from "@mui/material";
 
-const useStyles = makeStyles({
-  ecomDescription: {
-    padding: "2%",
-  },
-  ecomText: {
-    alignItems: "center",
-    textAlign: "center",
-  },
-  textFieldBox: {
-    width: "100%",
-  },
-});
 function Category() {
-  const classes = useStyles();
-  const [value, setValue] = useState("1");
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const [errors, setErrors] = useState("");
+  const[productId,setProductid]=useState("");
+  const[productName,setproductName]=useState("");
+  const[productPrice,setproductPrice]=useState("");
+  const[productDes,setproductDes]=useState("");
 
-  const [categoryInput, setcategory] = useState({
-    productId: "",
-    productName: "",
-    productDes: "",
-    productPrice: "",
-  });
-  const {productId,productName,productDes,productPrice}=categoryInput;
-  const handleInput = (e) => {
+  async function signup(){
    
-    setcategory({ ...categoryInput, [e.target.name]: e.target.value });
-  };
-  // const submitCategory=(e)=>{
-  //   // e.preventDefault();
-
-  //   const data={
-  //     productId: categoryInput.productId,
-  //     productName:categoryInput.productName,
-  //     productDes:categoryInput.productDes,
-  //     productPrice:categoryInput.productPrice,
-  //   };
-
-  //     axios.post('http://localhost:8000/api/category', data).then(res => {
-  //       if (res.data.status === 200) {
-  //       swal("success", res.data.message, "success");
-  //     }
-  //   });
-
-  // }
-  async function submitCategory(){
-    let result =await axios.post("http://localhost:8000/api/category",categoryInput);
-    setErrors('registration successfully');
-    setcategory({ productId: "",
-    productName: "",
-    productDes: "",
-    productPrice: "",})
-
+    let item ={productId,productName,productPrice,productDes}
+    console.warn(item)
+    let result= await fetch("http://127.0.0.1:8000/api/category",{
+      method:'POST',
+      body:JSON.stringify(item),
+      headers:{
+        "Content-Type":'application/json',
+        "Accept":'application/json',
+      }
+    })
+    result=await result.json()
+    console.warn("result",result)
   }
+
   return (
-    <div className={classes.ecomText}>
-      <Typography className={classes.ecomDescription} variant="h3">
-        Add category
-      </Typography>
-      <Box sx={{ width: "100%", typography: "body1" }}>
-        <TabContext value={value}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-              <TabList
-                onChange={handleChange}
-                aria-label="lab API tabs example"
-              >
-                <Tab label="Item One" value="1" />
-              </TabList>
-            </Box>
-          <form onSubmit={submitCategory}>
-            <TabPanel value="1">
-              <Grid container spacing={0}>
-                <Grid item xs={12} lg={7}>
-                  <TextField
-                    onChange={handleInput}
-                    name="productId"
-                    value={categoryInput.productId}
-                    className={classes.textFieldBox}
-                    margin="normal"
-                    id="outlined-basic"
-                    label="product Id"
-                    variant="outlined"
-                  />
-                  <br />
-                </Grid>
-              <Grid item xs={12} lg={7}>
+    <div>
+        <Typography variant="h3">Add category</Typography>
+        <form >
+          <Grid container spacing={0}>
+            <Grid item xs={12} lg={7}>
               <TextField
-                onChange={handleInput}
-                name="productName"
-                value={categoryInput.productName}
-                className={classes.textFieldBox}
+                name="productId"
                 margin="normal"
+                onChange={(e)=>setProductid(e.target.value)}
+                id="outlined-basic"
+                label="product Id"
+                value={productId}
+                variant="outlined"
+              />
+              <br />
+            </Grid>
+            <Grid item xs={12} lg={7}>
+              <TextField
+                name="productName"
+                margin="normal"
+                value={productName}
+                onChange={(e)=>setproductName(e.target.value)}
                 id="outlined-basic"
                 label="product Name "
                 variant="outlined"
               />
-              </Grid>
-              <br/>
-              <Grid item xs={12} lg={7}>
+            </Grid>
+            <br />
+            <Grid item xs={12} lg={7}>
               <TextField
-                onChange={handleInput}
+              
                 name="productDes"
-                value={categoryInput.productDes}
-                className={classes.textFieldBox}
+                value={productDes}
                 margin="normal"
+                onChange={(e)=>setproductDes(e.target.value)}
                 id="outlined-basic"
                 label="product Description"
                 variant="outlined"
               />
-              </Grid>
-              <br />
+            </Grid>
+            <br />
 
-              <Grid item xs={12} lg={7}>
+            <Grid item xs={12} lg={7}>
               <TextField
-                onChange={handleInput}
+             
                 name="productPrice"
-                value={categoryInput.productPrice}
-                className={classes.textFieldBox}
+                value={productPrice}
+                onChange={(e)=>setproductPrice(e.target.value)}
                 margin="normal"
                 id="outlined-basic"
                 label="product Price"
                 variant="outlined"
               />
-              </Grid>
-              </Grid>
+            </Grid>
+          </Grid>
 
-            </TabPanel>
-            <Button type="submit"  variant="contained">Submit</Button>
-          </form>
-        </TabContext>
-      </Box>
-    </div>
-  );
+          <Button  onClick={signup} variant="contained">
+            Submit
+          </Button>
+        </form>
+      </div>
+  )
 }
 
-export default Category;
+export default Category
